@@ -1,0 +1,17 @@
+[Unit]
+Description=Shangcoin Full Node
+After=network.target
+
+[Service]
+User=shangcoin
+Group=shangcoin
+WorkingDirectory=~
+
+Type=forking
+PIDFile=/var/run/shangcoind.pid
+
+ExecStart=/usr/bin/shangcoind --config-file /etc/shangcoind.conf \
+    --detach --pidfile /var/run/shangcoind.pid
+
+[Install]
+WantedBy=multi-user.target
