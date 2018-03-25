@@ -84,8 +84,10 @@ static const struct {
 } mainnet_hard_forks[] = {
   // version 1 from the start of the blockchain
   { 1, 1, 0, 1519444783 },
+  { 2, 30000, 0, 1523750400 },// version 2: 04/15/2018 @ 12:00am (UTC)
+
 };
-static const uint64_t mainnet_hard_fork_version_1_till = 1009826;
+static const uint64_t mainnet_hard_fork_version_1_till = 29999;
 
 static const struct {
   uint8_t version;
@@ -95,8 +97,9 @@ static const struct {
 } testnet_hard_forks[] = {
   // version 1 from the start of the blockchain
   { 1, 1, 0, 1519444713 }, 
+  { 2, 50, 0, 15194450000 }, 
 };
-static const uint64_t testnet_hard_fork_version_1_till = 624633;
+static const uint64_t testnet_hard_fork_version_1_till = 49;
 
 //------------------------------------------------------------------
 Blockchain::Blockchain(tx_memory_pool& tx_pool) :
