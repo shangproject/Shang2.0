@@ -152,29 +152,6 @@ namespace config
   std::string const GENESIS_TX = "010f01ff0001ddf0ef855f029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101d84a6d14d6bc078294e288b84e1796debe630ce2f6718fd87c531f769d0109d7";
   uint32_t const GENESIS_NONCE = 10000;
 
-
-// 01
-// 12
-// 01
-// ff
-// 00
-// 01
-// 1e026bc5c7db8a664f652d78adb587ac4d759c6757258b64ef9cba3c0354e64fb2e4
-// 21
-// 01
-// abca6a39c561d0897be183eb0143990eba201aa7d2c652ab0555d28bb4b70728
-
-// 01
-// 0f
-// 01
-// ff
-// 00
-// 01
-// ddf0ef855f029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd088071
-// 21
-// 01
-// d84a6d14d6bc078294e288b84e1796debe630ce2f6718fd87c531f769d0109d7
-
   namespace testnet
   {
     uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX =  0x197; // SG
