@@ -49,6 +49,10 @@
 #define CRYPTONOTE_DEFAULT_TX_SPENDABLE_AGE             10
 
 #define BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW               60
+#define MEMORY                                          (1 << 21) // 2MB scratchpad
+#define ITER                                            (1 << 20) // 1 048 576
+#define MEMORY_V2                                       (1 << 22) // 4MB scratchpad
+#define ITER_V2                                         (1 << 21) // 2 097 152
 
 // MONEY_SUPPLY - total number coins to be generated
 #define MONEY_SUPPLY                                    ((uint64_t)(26753040000000000))
