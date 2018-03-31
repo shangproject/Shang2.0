@@ -84,7 +84,7 @@ static const struct {
 } mainnet_hard_forks[] = {
   // version 1 from the start of the blockchain
   { 1, 1, 0, 1519444783 },
-  { 2, 35000, 0, 1523750400 },// version 2: 04/15/2018 @ 12:00am (UTC)
+  { 2, 35000, 0, 1523750400 },// version 2 at Height 35000: 04/15/2018 @ 12:00am (UTC)
 };
 static const uint64_t mainnet_hard_fork_version_1_till = 34999;
 
