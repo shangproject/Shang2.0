@@ -40,7 +40,7 @@
 #include "oaes_lib.h"
 
 #define MEMORY         (1 << 22) // 4MB scratchpad
-#define ITER           (1 << 21) // 2,097,152 times (1<<21)
+#define ITER           (1 << 20) 
 #define AES_BLOCK_SIZE  16
 #define AES_KEY_SIZE    32
 #define INIT_SIZE_BLK   8
