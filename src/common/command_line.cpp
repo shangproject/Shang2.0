@@ -134,7 +134,7 @@ namespace command_line
   };
   const command_line::arg_descriptor<std::string> arg_check_updates = {
     "check-updates"
-  , "Check for new versions of monero: [disabled|notify|download|update]"
+  , "Check for new versions of shang: [disabled|notify|download|update]"
   , "notify"
   };
   const arg_descriptor<bool> arg_fluffy_blocks  = {

@@ -69,14 +69,14 @@ struct pre_rct_output_data_t
 template <typename T>
 inline void throw0(const T &e)
 {
-  LOG_PRINT_L0(e.what());
+  LOG_PRINT_L2(e.what());
   throw e;
 }
 
 template <typename T>
 inline void throw1(const T &e)
 {
-  LOG_PRINT_L1(e.what());
+  LOG_PRINT_L2(e.what());
   throw e;
 }
 

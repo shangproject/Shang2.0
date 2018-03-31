@@ -168,6 +168,8 @@ namespace cryptonote
 
   bool checkpoints::load_checkpoints_from_json(const std::string json_hashfile_fullpath)
   {
+    // EDITING: CHECKPOINT JSON
+    /*
     boost::system::error_code errcode;
     if (! (boost::filesystem::exists(json_hashfile_fullpath, errcode)))
     {
@@ -194,12 +196,15 @@ namespace cryptonote
       }
       ++it;
     }
+    */
 
     return true;
   }
 
   bool checkpoints::load_checkpoints_from_dns(bool testnet)
   {
+    // EDITING: ADD DNS
+    /*
     std::vector<std::string> records;
 
     // All four MoneroPulse domains have DNSSEC on and valid
@@ -239,6 +244,7 @@ namespace cryptonote
         ADD_CHECKPOINT(height, hashStr);
       }
     }
+    */
     return true;
   }
 

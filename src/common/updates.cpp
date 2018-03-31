@@ -38,6 +38,8 @@ namespace tools
 {
   bool check_updates(const std::string &software, const std::string &buildtag, std::string &version, std::string &hash)
   {
+    // EDITING: MAKE CHECKPOINT DOMAIN
+    /*
     std::vector<std::string> records;
     bool found = false;
 
@@ -45,7 +47,7 @@ namespace tools
 
     // All four MoneroPulse domains have DNSSEC on and valid
     static const std::vector<std::string> dns_urls = {
-        "updates.shangcoin.com"
+        //"updates.shangcoin.com"
     };
 
     if (!tools::dns_utils::load_txt_records_from_dns(records, dns_urls))
@@ -91,11 +93,15 @@ namespace tools
       found = true;
     }
     return found;
+    */
+    return true;
   }
 
   std::string get_update_url(const std::string &software, const std::string &subdir, const std::string &buildtag, const std::string &version, bool user)
   {
-    const char *base = user ? "https://downloads.getmonero.org/" : "http://updates.getmonero.org/";
+    // EDITING: UPDATE WALLET
+    /*
+    const char *base = user ? "https://downloads.getshangcoin.org/" : "http://updates.getshangcoin.org/";
 #ifdef _WIN32
     static const char extension[] = ".zip";
 #else
@@ -109,5 +115,7 @@ namespace tools
       url += subdir + "/";
     url = url + software + "-" + buildtag + "-v" + version + extension;
     return url;
+    */
+    return "";
   }
 }

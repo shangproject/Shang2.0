@@ -748,7 +748,7 @@ namespace cryptonote
       return true;
     }
     blobdata bd = get_block_hashing_blob(b);
-    crypto::cn_slow_hash(bd.data(), bd.size(), res);
+    crypto::cn_slow_hash(bd.data(), bd.size(), res, b.major_version > 1 ? 1 : 0);
     return true;
   }
   //---------------------------------------------------------------

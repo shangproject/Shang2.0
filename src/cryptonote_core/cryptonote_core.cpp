@@ -1290,7 +1290,8 @@ namespace cryptonote
   //-----------------------------------------------------------------------------------------------
   bool core::check_updates()
   {
-    static const char software[] = "monero";
+    /*
+    static const char software[] = "shangcoin";
     static const char subdir[] = "cli"; // because it can never be simple
 #ifdef BUILD_TAG
     static const char buildtag[] = BOOST_PP_STRINGIZE(BUILD_TAG);
@@ -1378,8 +1379,10 @@ namespace cryptonote
       return true;
 
     MCERROR("updates", "Download/update not implemented yet");
+    */
     return true;
   }
+
   //-----------------------------------------------------------------------------------------------
   void core::set_target_blockchain_height(uint64_t target_blockchain_height)
   {
