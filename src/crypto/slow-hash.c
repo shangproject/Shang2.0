@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2014-2018, The Shangcoin Project
 //
 // All rights reserved.
 //
@@ -40,7 +40,7 @@
 #include "oaes_lib.h"
 
 #define MEMORY         (1 << 22) // 4MB scratchpad
-#define ITER           (1 << 20)
+#define ITER           (1 << 21) // 2,097,152 times (1<<21)
 #define AES_BLOCK_SIZE  16
 #define AES_KEY_SIZE    32
 #define INIT_SIZE_BLK   8
@@ -302,9 +302,9 @@ STATIC INLINE void aes_256_assist2(__m128i* t1, __m128i * t3)
  * This is an SSE-optimized implementation of AES key schedule generation.  It
  * expands the key into multiple round keys, each of which is used in one round
  * of the AES encryption used to fill (and later, extract randomness from)
- * the large 2MB buffer.  Note that CryptoNight does not use a completely
+ * the large 4MB buffer.  Note that CryptoNight does not use a completely
  * standard AES encryption for its buffer expansion, so do not copy this
- * function outside of Monero without caution!  This version uses the hardware
+ * function outside of Shangcoin without caution!  This version uses the hardware
  * AESKEYGENASSIST instruction to speed key generation, and thus requires
  * CPU AES support.
  * For more information about these functions, see page 19 of Intel's AES instructions
@@ -358,7 +358,7 @@ STATIC INLINE void aes_expand_key(const uint8_t *key, uint8_t *expandedKey)
 /**
  * @brief a "pseudo" round of AES (similar to but slightly different from normal AES encryption)
  *
- * To fill its 2MB scratch buffer, CryptoNight uses a nonstandard implementation
+ * To fill its 4MB scratch buffer, CryptoNight uses a nonstandard implementation
  * of AES encryption:  It applies 10 rounds of the basic AES encryption operation
  * to an input 128 bit chunk of data <in>.  Unlike normal AES, however, this is
  * all it does;  it does not perform the initial AddRoundKey step (this is done
@@ -470,10 +470,10 @@ BOOL SetLockPagesPrivilege(HANDLE hProcess, BOOL bEnable)
 #endif
 
 /**
- * @brief allocate the 2MB scratch buffer using OS support for huge pages, if available
+ * @brief allocate the 4MB scratch buffer using OS support for huge pages, if available
  *
- * This function tries to allocate the 2MB scratch buffer using a single
- * 2MB "huge page" (instead of the usual 4KB page sizes) to reduce TLB misses
+ * This function tries to allocate the 4MB scratch buffer using a single
+ * 4MB "huge page" (instead of the usual 4KB page sizes) to reduce TLB misses
  * during the random accesses to the scratch buffer.  This is one of the
  * important speed optimizations needed to make CryptoNight faster.
  *
@@ -535,25 +535,25 @@ void slow_hash_free_state(void)
 }
 
 /**
- * @brief the hash function implementing CryptoNight, used for the Monero proof-of-work
+ * @brief the hash function implementing CryptoNight, used for the Shangcoin proof-of-work
  *
  * Computes the hash of <data> (which consists of <length> bytes), returning the
  * hash in <hash>.  The CryptoNight hash operates by first using Keccak 1600,
  * the 1600 bit variant of the Keccak hash used in SHA-3, to create a 200 byte
  * buffer of pseudorandom data by hashing the supplied data.  It then uses this
- * random data to fill a large 2MB buffer with pseudorandom data by iteratively
+ * random data to fill a large 4MB buffer with pseudorandom data by iteratively
  * encrypting it using 10 rounds of AES per entry.  After this initialization,
- * it executes 524,288 rounds of mixing through the random 2MB buffer using
+ * it executes 1,048,576 rounds of mixing through the random 4MB buffer using
  * AES (typically provided in hardware on modern CPUs) and a 64 bit multiply.
  * Finally, it re-mixes this large buffer back into
  * the 200 byte "text" buffer, and then hashes this buffer using one of four
  * pseudorandomly selected hash functions (Blake, Groestl, JH, or Skein)
  * to populate the output.
  *
- * The 2MB buffer and choice of functions for mixing are designed to make the
+ * The 4MB buffer and choice of functions for mixing are designed to make the
  * algorithm "CPU-friendly" (and thus, reduce the advantage of GPU, FPGA,
  * or ASIC-based implementations):  the functions used are fast on modern
- * CPUs, and the 2MB size matches the typical amount of L3 cache available per
+ * CPUs, and the 4MB size matches the typical amount of L3 cache available per
  * core on 2013-era CPUs.  When available, this implementation will use hardware
  * AES support on x86 CPUs.
  *
@@ -601,7 +601,7 @@ void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int 
     VARIANT1_INIT64();
 
     /* CryptoNight Step 2:  Iteratively encrypt the results from Keccak to fill
-     * the 2MB large random access buffer.
+     * the 4MB large random access buffer.
      */
 
     if(useAes)
@@ -631,8 +631,8 @@ void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int 
     U64(b)[0] = U64(&state.k[16])[0] ^ U64(&state.k[48])[0];
     U64(b)[1] = U64(&state.k[16])[1] ^ U64(&state.k[48])[1];
 
-    /* CryptoNight Step 3:  Bounce randomly 1,048,576 times (1<<20) through the mixing buffer,
-     * using 524,288 iterations of the following mixing function.  Each execution
+    /* CryptoNight Step 3:  Bounce randomly 2,097,152 times (1<<21) through the mixing buffer,
+     * using 1,048,576 iterations of the following mixing function.  Each execution
      * performs two reads and writes from the mixing buffer.
      */
 
@@ -938,7 +938,7 @@ void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int 
     VARIANT1_INIT64();
 
     /* CryptoNight Step 2:  Iteratively encrypt the results from Keccak to fill
-     * the 2MB large random access buffer.
+     * the 4MB large random access buffer.
      */
 
     aes_expand_key(state.hs.b, expandedKey);
@@ -953,8 +953,8 @@ void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int 
     U64(b)[0] = U64(&state.k[16])[0] ^ U64(&state.k[48])[0];
     U64(b)[1] = U64(&state.k[16])[1] ^ U64(&state.k[48])[1];
 
-    /* CryptoNight Step 3:  Bounce randomly 1,048,576 times (1<<20) through the mixing buffer,
-     * using 524,288 iterations of the following mixing function.  Each execution
+    /* CryptoNight Step 3:  Bounce randomly 2,097,152 times (1<<21) through the mixing buffer,
+     * using 1,048,576 iterations of the following mixing function.  Each execution
      * performs two reads and writes from the mixing buffer.
      */
 
