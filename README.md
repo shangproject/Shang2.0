@@ -1,17 +1,35 @@
 # Shangcoin
 
-Copyright (c) 2018, The Shang Project  
-Copyright (c) 2014-2017, The Monero Project  
-Portions Copyright (c) 2012-2013, The Cryptonote developers  
+
 
 ## Introduction
 
 Shangcoin is a private, secure, untraceable cryptocurrency. 
 
 
+| Software upgrade block height | Date       | Fork version | Minimum Monero version | Recommended Monero version | Details                                                                            |  
+| ------------------------------ | -----------| ----------------- | ---------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
+| 35000                        | 2018-04-03 | v2                | v0.3.0.0              | v0.3.0.0                  | Cryptonight variant 1, 4 MB scratchpad memory, 2x time Iterations
+
+
+
+
 ## About this Project
 
+Copyright (c) 2018, The Shang Project  
+Copyright (c) 2014-2018, The Monero Project  
+Portions Copyright (c) 2012-2013, The Cryptonote developers  
+
+
+
 This is the core implementation of Shang. It is open source and completely free to use without restrictions. 
+
+Cryptonight-Shang V2 Update:
+- MoneroV7
+- 4 MB scratchpad memory
+- 2x time Iterations
+
+
 
 
 ## Compiling Shangcoin from Source
