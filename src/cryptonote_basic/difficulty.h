@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017, The Monero Project
+// Copyright (c) 2017-2018, The Masari Project (forked from The Monero Project)
 // 
 // All rights reserved.
 // 
@@ -53,4 +54,6 @@ namespace cryptonote
      */
     bool check_hash(const crypto::hash &hash, difficulty_type difficulty);
     difficulty_type next_difficulty(std::vector<std::uint64_t> timestamps, std::vector<difficulty_type> cumulative_difficulties, size_t target_seconds);
+    difficulty_type next_difficulty_v2(std::vector<std::uint64_t> timestamps, std::vector<difficulty_type> cumulative_difficulties, size_t target_seconds, bool max_only);
+
 }
