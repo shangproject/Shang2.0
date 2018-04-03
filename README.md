@@ -9,7 +9,7 @@ Shangcoin is a private, secure, untraceable cryptocurrency.
 
 | Software upgrade block height | Date       | Fork version | Minimum Monero version | Recommended Monero version | Details                                                                            |  
 | ------------------------------ | -----------| ----------------- | ---------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
-| 35000                        | 2018-04-03 | v2                | v0.3.0.0              | v0.3.0.0                  | Cryptonight variant 1, 4 MB scratchpad memory, 2x time Iterations
+| 35000                        | 2018-04-05 | v2                | v0.0.3.1              | v0.0.3.1                  | Cryptonight variant 1, 4 MB scratchpad memory, 2x time Iterations, difficulty algorithm 
 
 
 
