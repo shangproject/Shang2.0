@@ -1,5 +1,7 @@
 // Copyright (c) 2014-2017, The Monero Project
-//
+// Copyright (c) 2017, The Masari Project
+// Zawy's LWMA difficulty algorithm
+
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without modification, are
