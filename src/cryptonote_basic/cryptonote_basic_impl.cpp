@@ -104,16 +104,13 @@ namespace cryptonote {
       base_reward = GENESIS_BLOCK_REWARD; // for swap coins and airdrop/bounty
     } 
     else if (height == 2) {
-      base_reward = 65000000000000; // for swap coins and airdrop/bounty
+      base_reward = 65000000000000; // for swap coins
     } 
     else if (height < 5000) {
       base_reward = 20000000000; //  
     } 
-    else if (height < 100000) {
+    else if (height < 35000) {
       base_reward = 10000000000; //  
-    } 
-    else if (height > 1000000 && height < 10000000) {
-      base_reward = 20000000000; //  
     } 
     else {
       base_reward = (MONEY_SUPPLY - already_generated_coins) >> emission_speed_factor;
