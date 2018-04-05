@@ -737,7 +737,11 @@ difficulty_type Blockchain::get_difficulty_for_next_block()
 
   if (version < 2) {
     return next_difficulty(timestamps, difficulties, target);
-  } else {
+  } 
+  else if (height == 35000){
+    return 100; 
+  }
+  else {
     return next_difficulty_v2(timestamps, difficulties, target);
   }
 
